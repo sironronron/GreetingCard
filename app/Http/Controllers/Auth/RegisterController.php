@@ -64,7 +64,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'avatar' => 'https://www.gravatar.com/avatar/'.md5(strtolower($data['email'])).'.jpg?s=200&d=mm',
             'name' => $data['name'],
+            'username' => str_slug($data['name'], '.'),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
